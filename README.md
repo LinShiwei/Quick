@@ -1,5 +1,7 @@
 ![](http://f.cl.ly/items/0r1E192C1R0b2g2Q3h2w/QuickLogo_Color.png)
 
+[![Build Status](https://travis-ci.org/Quick/Quick.svg?branch=master)](https://travis-ci.org/Quick/Quick)
+
 Quick is a behavior-driven development framework for Swift and Objective-C.
 Inspired by [RSpec](https://github.com/rspec/rspec), [Specta](https://github.com/specta/specta), and [Ginkgo](https://github.com/onsi/ginkgo).
 
@@ -32,6 +34,15 @@ class TableOfContentsSpec: QuickSpec {
 ```
 #### Nimble
 Quick comes together with [Nimble](https://github.com/Quick/Nimble) — a matcher framework for your tests. You can learn why `XCTAssert()` statements make your expectations unclear and how to fix that using Nimble assertions [here](./Documentation/en-us/NimbleAssertions.md).
+
+## Swift Version
+
+Certain versions of Quick and Nimble only support certain versions of Swift. Depending on which version of Swift your project uses, you should use specific versions of Quick and Nimble. Use the table below to determine which versions of Quick and Nimble are compatible with your project.
+
+|Swift version        |Quick version   |Nimble version |
+|:--------------------|:---------------|:--------------|
+|Swift 3              |v0.10.0 or later|v5.0.0 or later|
+|Swift 2.2 / Swift 2.3|v0.9.3          |v4.1.0         |
 
 ## Documentation
 
