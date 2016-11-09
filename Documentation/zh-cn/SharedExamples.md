@@ -1,14 +1,10 @@
-# Reducing Test Boilerplate with Shared Assertions
+# 使用 Shared Assertion 来复用测试模板代码
 
-In some cases, the same set of specifications apply to multiple objects.
+在某种场合下，一些特定的测试代码可以应用在不同的对象上。
 
-For example, consider a protocol called `Edible`. When a dolphin
-eats something `Edible`, the dolphin becomes happy. `Mackerel` and
-`Cod` are both edible. Quick allows you to easily test that a dolphin is
-happy to eat either one.
+比如，假设有一个叫 `Edible` 的协议。当一只海豚吃了标识为 `Edible` 的食物时，它会变得高兴。`Mackerel` 和 `Cod` 都遵循 `Edible` 协议。这个时候，Quick 的 shared example（共享用例）能帮你更容易地测试 `Mackerel` 和 `Cod` 的行为。
 
-The example below defines a set of  "shared examples" for "something edible",
-and specifies that both mackerel and cod behave like "something edible":
+下面的例子为一些 `Edible` 的食物定义了一组共享用例，以测试 mackerel 和 cod 的行为。
 
 ```swift
 // Swift
@@ -97,13 +93,9 @@ itBehavesLike(@"someting edible", ^{ return @{ @"edible": cod }; });
 QuickSpecEnd
 ```
 
-Shared examples can include any number of `it`, `context`, and
-`describe` blocks. They save a *lot* of typing when running
-the same tests against several different kinds of objects.
+共享用例可以包括任意数量的 `it`， `context` 和 `describe` 代码块。当使用它们来测试不同对象的相同行为时，你可以少写*很多*不必要的重复代码。
 
-In some cases, you won't need any additional context. In Swift, you can
-simply use `sharedExamples` closures that take no parameters. This
-might be useful when testing some sort of global state:
+一般来说，你使用共享用例进行测试时不需要依赖其他额外的对象。在 Swift 中，你可以简单地用一个不带参数的 `sharedExample` 闭包来使用共享用例。当你需要进行全局测试时，这很有用。
 
 ```swift
 // Swift
@@ -116,10 +108,6 @@ sharedExamples("everything under the sea") {
 
 itBehavesLike("everything under the sea")
 ```
+> 如果你使用 Objective-C 的话，你需要传入一个带 `QCKDSLSharedExampleContext` 参数的 block，即使你并不打算使用它。不好意思，你只能这样做，人生有时就是这么的无奈。:cookie: :bomb:
 
-> In Objective-C, you'll have to pass a block that takes a
-  `QCKDSLSharedExampleContext`, even if you don't plan on using that
-  argument. Sorry, but that's the way the cookie crumbles!
-  :cookie: :bomb:
-
-You can also "focus" shared examples using the `fitBehavesLike` function.
+你也可以使用 `fitBehavesLike` 函数来单独测试共享用例。
